@@ -1,0 +1,12 @@
+server:
+  port: 8700
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://127.0.0.1:8761/registry/eureka/
+    
+#log
+logging:
+  config: classpath:config/logback-spring.xml
+  path: /application/log/gateway_logs
