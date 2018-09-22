@@ -1,5 +1,7 @@
 server:
   port: 8700
+  servlet:
+    context-path: /gateway
 
 eureka:
   client:
