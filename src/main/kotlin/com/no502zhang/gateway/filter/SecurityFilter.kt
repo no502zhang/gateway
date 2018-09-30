@@ -2,13 +2,15 @@ package com.no502zhang.gateway.filter
 
 import com.netflix.zuul.ZuulFilter
 import com.netflix.zuul.context.RequestContext
+import com.no502zhang.gateway.filter.constants.FilterConstants.Companion.SECURITY_FILTER_ORDER
 import org.apache.commons.lang.StringUtils
+import org.springframework.cloud.netflix.zuul.filters.support.FilterConstants.PRE_TYPE
 
 class SecurityFilter : ZuulFilter() {
     override fun run(): Any? {
         var ctx = RequestContext.getCurrentContext()
         var request = ctx.request
-        var token = request?.getHeader("z-token")
+        var token = request.getHeader("z-token")
         if (StringUtils.isNotBlank(token)) {
             ctx.setSendZuulResponse(true) // 对该请求进行路由
             ctx.responseStatusCode = 200
@@ -28,11 +30,11 @@ class SecurityFilter : ZuulFilter() {
     }
 
     override fun filterType(): String {
-        return "pre"
+        return PRE_TYPE
     }
 
     override fun filterOrder(): Int {
-        return 0
+        return SECURITY_FILTER_ORDER
     }
 
 }
